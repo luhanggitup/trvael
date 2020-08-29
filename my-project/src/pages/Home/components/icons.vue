@@ -1,8 +1,8 @@
 <template>
   <div class="icons">
-    <swiper>
+    <swiper :options="swiperOption" >
       <swiper-slide  v-for="(page,index) of pages" :key="index">
-        <div class="icon" v-for="item of iconList" :key="item.id">
+        <div class="icon" v-for="item of list" :key="item.id">
           <div class="icon-img">
             <img
               class="icon-img-content"
@@ -21,55 +21,18 @@ export default {
   name: "HomeIcons",
   data () {
     return{
-      iconList:[
-        {
-          id:'001',
-          imgUrl:'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1543241925,4273539728&fm=26&gp=0.jpg',
-          desc:'景点门票'
-        },
-        {
-          id:'002',
-          imgUrl:'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1543241925,4273539728&fm=26&gp=0.jpg',
-          desc:'滑雪季节'
-        },
-        {
-          id:'004',
-          imgUrl:'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1543241925,4273539728&fm=26&gp=0.jpg',
-          desc:'景点门票'
-        },
-        {
-          id:'005',
-          imgUrl:'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1543241925,4273539728&fm=26&gp=0.jpg',
-          desc:'景点门票'
-        },
-        {
-          id:'006',
-          imgUrl:'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1543241925,4273539728&fm=26&gp=0.jpg',
-          desc:'景点门票'
-        },
-        {
-          id:'007',
-          imgUrl:'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1543241925,4273539728&fm=26&gp=0.jpg',
-          desc:'动物园'
-        },
-        {
-          id:'008',
-          imgUrl:'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1543241925,4273539728&fm=26&gp=0.jpg',
-          desc:'观光车'
-        },
-        {
-          id:'009',
-          imgUrl:'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1543241925,4273539728&fm=26&gp=0.jpg',
-          desc:'你变模样'
-        }
-      ]
-
+      swiperOption:{
+        autoplay:false
+      }
     }
+  },
+  props:{
+    list:Array
   },
   computed: {
     pages () {
       const pages =[]
-      this.iconList.forEach(function(item,index){
+      this.list.forEach(function(item,index){
         const page = Math.floor (index/8)
         if(!pages[page]){
          pages[page] = []
@@ -78,15 +41,15 @@ export default {
       })
       return pages
 
-      // const pages =[]
-      // this.iconList.array.forEach(item,index=> {
-      //   const page = Math.floor(index/8)
-      //   if(!pages[page]){
-      //     pages[page] = []
-      //   }
-      //   pages[page].push(item)
-      // });
-      // return item
+  //     const pages =[]
+  //     this.list.forEach(item,index=> {
+  //       const page = Math.floor(index/8)
+  //       if(!pages[page]){
+  //         pages[page] = []
+  //       }
+  //       pages[page].push(item)
+  //     });
+  //     return pages
       }
   }
 };
