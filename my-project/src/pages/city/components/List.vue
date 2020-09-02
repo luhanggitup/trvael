@@ -1,6 +1,6 @@
 <template>
   <div class="list" ref="wrapper">
-    <div >
+    <div>
       <div class="area">
         <div class="title border-topbottom">当前城市</div>
         <div class="button-list">
@@ -11,13 +11,13 @@
       </div>
       <div class="area">
         <div class="title border-topbottom">热门城市</div>
-        <div class="button-list" >
+        <div class="button-list">
           <div class="button-wrapper" v-for="item of hot" :key="item.id">
             <div class="button">{{item.name}}</div>
           </div>
         </div>
       </div>
-      <div class="area" v-for="(item,key) of cities" :key="key">
+      <div class="area" v-for="(item,key) of cities" :key="key" :ref="key">
         <div class="title border-topbottom">{{key}}</div>
         <div class="item-list">
           <div class="item border-topbottom"
@@ -36,12 +36,22 @@
 import Bscroll from 'better-scroll'
 export default {
   name: "Citylist",
-  props:{
+   props:{
     cities:{},
-    hot:Array
+    hot:Array,
+    letter:String
   },
-  mounted (){ 
-      this.scroll = new Bscroll(this.$refs.wrapper)
+
+watch: {
+    letter() {
+      if (this.letter) {
+        const element = this.$refs[this.letter][0]
+        this.scroll.scrollToElement(element)
+      }
+    }
+  },
+   mounted() {
+    this.scroll = new Bscroll(this.$refs.wrapper)
   }
 };
 </script>
