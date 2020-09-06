@@ -1,12 +1,16 @@
 <template>
   <div>
     <div class="search">
-      <input type="text" v-model="keyWord" placeholder="输入城市名或拼音" />
+      <input type="text" v-model="keyWord" 
+      placeholder="输入城市名或拼音" 
+     />
     </div>
     <div class="search-content" ref="search" v-show="keyWord">
       <ul>
         <li class='item-search border-bottom' 
-        v-for="item in list" :key="item.id">{{item.name}}</li>
+        v-for="item in list" :key="item.id"
+         @click="handleCityClick(item.name)">
+        {{item.name}}</li>
         <li class="item-search border-bottom" v-show="noData">
           没有找到匹配数据
         </li>
@@ -17,6 +21,8 @@
 
 <script>
 import Bscroll from 'better-scroll'
+import CityVue from '../City.vue'
+import {mapMutations} from 'vuex'
 export default {
   name: "CitySearch",
   props:{
@@ -28,6 +34,16 @@ export default {
       list:[],
       timer:null
     }
+  },
+  methods:{
+    handleCityClick (city) {
+      // this.$store.commit('changeCity',city)
+      // 这里是mapMutations简便写法
+      this.changeCity(city)
+       // 路由跳转，需要跳转到哪个页面路劲
+      this.$router.push('./')
+   },
+   ...mapMutations(['changeCity'])
   },
   computed:{
     noData(){
