@@ -2,14 +2,20 @@
   <div>
     <div class="title">热线推荐</div>
     <ul>
-      <li class="item border-bottom" v-for="item in List" :key="item.id">
+      <!-- routerlink默认变成A标签 -->
+      <!-- 把li标签改写成li标签 -->
+        <router-link 
+        tag="li"
+        :to="'/detail/' + item.id "
+        class="item border-bottom" 
+        v-for="item in List" :key="item.id">
           <img class='item-img' :src="item.imgUrl">
         <div class="item-info">
           <p class="item-title">{{item.title}}</p>
           <p class="item-desc">{{item.desc}}</p>
           <button class="item-button"> 查看详情</button>
         </div>
-      </li>
+        </router-link>
     </ul>
   </div>
 </template>

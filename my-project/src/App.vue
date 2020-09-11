@@ -17,7 +17,5 @@ export default {
 </script>
 
 <style>
-/* *{
-  touch-action:manipulation;
-} */
+
 </style>
