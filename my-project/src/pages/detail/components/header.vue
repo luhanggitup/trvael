@@ -38,9 +38,13 @@ export default {
     }
   },
   activated () {
+    // 全局事件，绑定在全局window上面
     window.addEventListener('scroll',this.handleScroll)
+  },
+  // 解绑全局事件
+  deactived () {
+    removeEventListener('scroll',this.handleScroll)
   }
-
 }
 </script>
 
@@ -62,6 +66,7 @@ export default {
   font-size .4rem
 }
 .header-fixed{
+  z-index 2 
   position fixed
   top 0
   left 0
